@@ -1,2 +1,2 @@
-usbhid
+hidapi
 tqdm

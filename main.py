@@ -1,6 +1,7 @@
 import hid
 import time
-from tqdm import tqdm
+import pprint
+# from tqdm import tqdm
 
 ALL_CH = 255
 
@@ -68,7 +69,10 @@ try:
             
             h.write(tmp_dat)
             
-            print(tmp_dat)
+            for ch in tmp_dat[11:]:
+                print(f"{ch:03d}", sep='', end=' ')
+            
+            print()
         
     
     # 嘗試傳送一輪資料
