@@ -54,18 +54,35 @@ try:
     h.write(init_dat)
     h.write(init_dat)
     
-    # 嘗試傳送一輪資料
-    print("嘗試傳送一輪資料")
-    for r in tqdm(range(1)):
+    dat = [0 for x in range(540)]
+    
+    while (True):
+        channel, val = map(int, input("通道, 數值").split(" "))
+        
+        dat[channel - 1] = val
+        
         for i in range(10):
-            dat = header[i][:]
-            print('Header:', header[i][:])
+            tmp_dat = header[i][:]
             
-            for ch in range(54):
-                dat.append(ALL_CH)
-            h.write(dat)
-        print("傳送成功")
-        time.sleep(10/1000)
+            tmp_dat += dat[i*54 : (i+1) * 54]
+            
+            h.write(tmp_dat)
+            
+            print(tmp_dat)
+        
+    
+    # 嘗試傳送一輪資料
+    # print("嘗試傳送一輪資料")
+    # for r in tqdm(range(1)):
+    #     for i in range(10):
+    #         dat = header[i][:]
+    #         print('Header:', header[i][:])
+            
+    #         for ch in range(54):
+    #             dat.append(ALL_CH)
+    #         h.write(dat)
+    #     print("傳送成功")
+    #     time.sleep(10/1000)
 
     # wait
     time.sleep(0.05)
